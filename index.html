@@ -554,7 +554,9 @@ button:hover {
 <script>
 
 const apiUrl =
-"https://script.google.com/macros/s/AKfycbyyjGGWP6PhN6g3FlxEDnpH_YdcZD6LVEvirZ2hsoEdJ-zAdHbKuGJZUWv-3JW2loq71g/exec";
+"https://script.google.com/macros/s/AKfycbwZT5AdCEilyZDBIX6Zp6cOEwFJh1V-gM7nhuwuRLRB8JQ3Req7SqZ0fqYF_7_y_iAy1A/exec";
+
+
 const spreadsheetId =
 "14V4eCElJUCjix2n3-BaYwjj38PmcWyNfLsYxi-szJYY";
 
@@ -794,19 +796,31 @@ function renderBooks(data, containerId){
 } 
 
 function openBookEmbed(link, judul, viewerId){
-
   const viewer = document.getElementById(viewerId);
   if(!viewer) return;
 
+  // Pastikan fungsi convertToEmbed didefinisikan (lihat poin di bawah)
   let embedUrl = convertToEmbed(link);
 
   viewer.innerHTML = `
-    <h3 style="text-align:center">${escapeHtml(judul)}</h3>
-<iframe src="${link}"
-          style="width:100%;height:70vh;border:none;"></iframe>
-          `;
-}
+    <h3 style="text-align:center; margin-top:20px;">${escapeHtml(judul)}</h3>
+    <iframe src="${embedUrl}" 
+            style="width:100%; height:80vh; border:2px solid #ccc; border-radius:12px;" 
+            allow="autoplay"></iframe>
+  `;
+  
+  // Scroll otomatis ke tampilan buku agar siswa tahu buku sudah terbuka
+  viewer.scrollIntoView({ behavior: 'smooth' });
+} 
 
+function convertToEmbed(url) {
+  if (!url) return "";
+  // Jika ini link Google Drive, ubah /view atau /edit menjadi /preview
+  if (url.includes("drive.google.com")) {
+    return url.replace(/\/view.*|\/edit.*/, "/preview");
+  }
+  return url;
+} 
 
 
 
@@ -1262,7 +1276,7 @@ function getSheetByGid(gid){
 
       return sheets[i]
         .getDataRange()
-        .getValues();
+        getDisplayValues();
     }
   }
 
@@ -1296,6 +1310,21 @@ window.onload = ()=>{
 
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
