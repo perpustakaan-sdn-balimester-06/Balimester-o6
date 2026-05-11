@@ -21,394 +21,783 @@
 
     <style>
       /* === RESPONSIVE TAMBAHAN UNTUK HP DAN TABLET === */
+/* =========================================================
+   ROOT / WARNA DASAR
+========================================================= */
 
-/* 🔹 Umum: ponsel & tablet */
-@media (max-width: 1024px) {
-  header h1 {
-    font-size: 1.7rem;
-    line-height: 1.4;
-  }
+:root{
+  --primary1:#667eea;
+  --primary2:#764ba2;
 
-  .container {
-    margin: 0.75rem;
-    padding: 0.9rem;
-    border-radius: 12px;
-  }
+  --dark:#243447;
+  --light:#ffffff;
+  --soft:#f5f7fb;
 
-  h2, h3 {
-    font-size: 1.1rem;
-  }
+  --border:#e8e8e8;
 
-  button {
-    font-size: 1rem;
-    padding: 0.8rem 1rem;
-    width: 95%;
-    max-width: 400px;
-  }
+  --shadow:
+    0 10px 30px rgba(0,0,0,.10);
 
-  /* agar foto proporsional */
-  #viewer {
-    height: 55vh;
-  }
-
-  #photo {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
-  }
-
-  .video-item iframe {
-    width: 100%;
-    height: 220px;
-  }
-
-  table {
-    font-size: 0.85rem;
-    min-width: unset;
-  }
-
-  th, td {
-    padding: 6px 8px;
-  }
+  --radius:22px;
 }
 
-/* 🔹 Mode portrait (vertikal) */
-@media (orientation: portrait) {
-  #viewer {
-    height: 55vh;
-  }
+/* =========================================================
+   RESET
+========================================================= */
 
-  .book-grid a img {
-    width: 120px;
-    height: 110px;
-  }
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
 }
 
-
-/* === LANDSCAPE (HORIZONTAL) === */
-@media (orientation: landscape) {
-  html, body {
-    overflow-x: hidden;
-  }
-
-  #viewer {
-    height: 70vw; /* gunakan lebar layar agar proporsional */
-    max-height: 100vh; /* batasi agar tidak kepanjangan */
-  }
-
-  .book-grid a img {
-    width: 140px;
-    height: 120px;
-  }
-
-  .container {
-    max-width: 95%;
-    margin: 1rem auto;
-  }
+html{
+  scroll-behavior:smooth;
 }
 
-  .video-item iframe {
-    height: 280px;
-  }
+body{
+  min-height:100vh;
 
-  .book-grid {
-    gap: 10px;
-  }
+  font-family:
+    'Segoe UI',
+    Tahoma,
+    Geneva,
+    Verdana,
+    sans-serif;
 
-  .book-grid a img {
-    width: 140px;
-    height: 120px;
-  }
+  color:var(--dark);
 
-/* 🔹 Tombol berdampingan rapi di layar kecil */
+  background:
+    linear-gradient(
+      135deg,
+      var(--primary1),
+      var(--primary2)
+    );
 
-@media (max-width: 768px) {
-  .button-row,
-  div[style*="display:flex"] {
-    flex-direction: column;
-    align-items: center;
-  }
-}
-      :root {
-        --primary1: #667eea;
-        --primary2: #764ba2;
-      }
-      html,body {
-        height: 100%;
-        margin: 0;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        background: linear-gradient(135deg, var(--primary1) 0%, var(--primary2) 100%);
-        color: #2c3e50;
-      }
-      
+  overflow-x:hidden;
 
-      header {
-        background: rgba(255,255,255,0.95);
-        backdrop-filter: blur(6px);
-        text-align: center;
-        padding: 1.25rem;
-        box-shadow: 0 2px 20px rgba(0,0,0,0.08);
-      }
-
-      .container {
-        max-width: 1000px;
-        margin: 2rem auto;
-        background: rgba(255,255,255,0.95);
-        padding: 1.5rem;
-        border-radius: 16px;
-        box-shadow: 0 8px 32px rgba(0,0,0,0.08);
-      }
-
-      h1,h2,h3,h4 { margin: .25rem 0 .75rem 0; color: #2c3e50; }
-      h1 { font-size: 1.7rem; }
-      h2 { font-size: 1.5rem; text-align:center; }
-
-      /* tombol global */
-       button {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  border: none;
-  padding: 0.9rem 1.2rem;; /* 🔹 lebih besar dari sebelumnya */
-  border-radius: 14px;
-  margin: 0.75rem;
-  cursor: pointer;
-  font-weight: 600;
-  font-size: 1.3rem; /* 🔹 teks lebih besar */
-  letter-spacing: 0.5px;
-  width: 90%; /* 🔹 tombol melebar hampir penuh */
-  max-width: 500px; /* 🔹 batas maksimal lebar tombol */
-  box-shadow: 0 6px 18px rgba(102, 126, 234, 0.3);
-  transition: all 0.3s ease;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
+  line-height:1.7;
 }
 
-button:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.45);
-  background: linear-gradient(135deg, #5a6eea 0%, #6d3ba2 100%);
+/* =========================================================
+   SCROLLBAR PREMIUM
+========================================================= */
+
+::-webkit-scrollbar{
+  width:10px;
 }
 
-
-
-
-    
-      
-      
-
-      .hidden { display: none !important; }
-
-      /* Galeri foto tanpa bingkai */
-#viewer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: auto;
-  background: transparent;
-  border-radius: 0;
-  overflow: hidden;
-  position: relative;
-  padding: 0;
-  margin: 0;
+::-webkit-scrollbar-track{
+  background:#f1f1f1;
 }
 
-#photo {
-  width: 100%;
-  height: auto;
-  display: block;
-  object-fit: cover;
-  border-radius: 0;
-  box-shadow: none;
+::-webkit-scrollbar-thumb{
+  background:
+    linear-gradient(
+      var(--primary1),
+      var(--primary2)
+    );
+
+  border-radius:20px;
 }
 
-#caption {
-  position: absolute;
-  bottom: 8px;
-  left: 0;
-  right: 0;
-  text-align: center;
-  color: white;
-  background: rgba(0, 0, 0, 0.4);
-  padding: 6px;
-  font-size: 0.9rem;
-  border-radius: 0;
+/* =========================================================
+   HEADER
+========================================================= */
+
+header{
+  background:
+    rgba(255,255,255,.96);
+
+  backdrop-filter:blur(10px);
+
+  text-align:center;
+
+  padding:1.4rem 1rem;
+
+  position:sticky;
+
+  top:0;
+
+  z-index:999;
+
+  box-shadow:
+    0 2px 20px rgba(0,0,0,.08);
 }
 
-/* =========================
+header h1{
+  font-size:2rem;
+
+  font-weight:800;
+
+  line-height:1.4;
+
+  color:var(--dark);
+}
+
+/* =========================================================
+   CONTAINER
+========================================================= */
+
+.container{
+  width:min(95%,1100px);
+
+  margin:1.5rem auto;
+
+  padding:1.5rem;
+
+  border-radius:28px;
+
+  background:
+    rgba(255,255,255,.96);
+
+  backdrop-filter:blur(8px);
+
+  box-shadow:var(--shadow);
+
+  overflow:hidden;
+
+  animation:fadeUp .7s ease;
+}
+
+/* =========================================================
+   TYPOGRAPHY
+========================================================= */
+
+h1,h2,h3,h4{
+  color:var(--dark);
+}
+
+h2{
+  text-align:center;
+
+  font-size:2rem;
+
+  margin-bottom:1.2rem;
+
+  font-weight:800;
+}
+
+h3{
+  margin-bottom:.8rem;
+}
+
+p{
+  margin-bottom:.8rem;
+}
+
+/* =========================================================
+   BUTTON
+========================================================= */
+
+button{
+  width:min(100%,500px);
+
+  display:block;
+
+  margin:12px auto;
+
+  padding:1rem 1.2rem;
+
+  border:none;
+
+  border-radius:16px;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--primary1),
+      var(--primary2)
+    );
+
+  color:#fff;
+
+  font-size:1.1rem;
+
+  font-weight:700;
+
+  cursor:pointer;
+
+  transition:.3s ease;
+
+  box-shadow:
+    0 8px 20px rgba(102,126,234,.25);
+}
+
+button:hover{
+  transform:
+    translateY(-3px)
+    scale(1.01);
+
+  box-shadow:
+    0 12px 28px rgba(102,126,234,.35);
+}
+
+button:active{
+  transform:scale(.98);
+}
+
+/* =========================================================
+   GAMBAR
+========================================================= */
+
+img{
+  max-width:100%;
+  height:auto;
+}
+
+/* =========================================================
+   GALERI FOTO
+========================================================= */
+
+#viewer{
+  width:100%;
+
+  position:relative;
+
+  overflow:hidden;
+
+  border-radius:24px;
+
+  background:#f4f4f4;
+
+  margin:1rem auto;
+
+  box-shadow:
+    0 8px 24px rgba(0,0,0,.10);
+}
+
+#photo{
+  width:100%;
+
+  height:auto;
+
+  display:block;
+
+  object-fit:contain;
+
+  transition:
+    transform .4s ease,
+    filter .4s ease;
+}
+
+#photo:hover{
+  transform:scale(1.01);
+
+  filter:brightness(1.02);
+}
+
+#caption{
+  position:absolute;
+
+  left:0;
+  right:0;
+  bottom:0;
+
+  padding:1rem;
+
+  text-align:center;
+
+  color:#fff;
+
+  font-size:1rem;
+
+  font-weight:600;
+
+  background:
+    linear-gradient(
+      transparent,
+      rgba(0,0,0,.55)
+    );
+
+  backdrop-filter:blur(3px);
+}
+
+/* =========================================================
    PENGUMUMAN
-========================= */
+========================================================= */
 
 #announcement-box{
   background:#fff;
-  border-radius:16px;
-  border:1px solid #e8e8e8;
-  padding:1.2rem;
-  margin:1rem 0;
-  box-shadow:0 4px 12px rgba(0,0,0,0.05);
-}
 
-#pengumuman{
-  width:100%;
+  border-radius:24px;
+
+  border:1px solid var(--border);
+
+  padding:1.3rem;
+
+  margin-top:1.5rem;
+
+  box-shadow:
+    0 6px 18px rgba(0,0,0,.05);
 }
 
 .announcement-item{
-  padding:1rem;
-  border-radius:12px;
   background:#fafafa;
+
+  border-left:8px solid var(--primary1);
+
+  border-radius:18px;
+
+  padding:1.2rem;
+
   margin-bottom:1rem;
-  border-left:6px solid #667eea;
+
+  transition:.3s ease;
 }
 
-.announcement-item:last-child{
-  margin-bottom:0;
+.announcement-item:hover{
+  transform:translateY(-2px);
+
+  box-shadow:
+    0 6px 18px rgba(0,0,0,.08);
 }
 
 .announcement-title{
-  font-size:1.4rem;
-  font-weight:700;
-  color:#2c3e50;
-  margin-bottom:0.8rem;
+  background:
+    linear-gradient(
+      135deg,
+      var(--primary1),
+      var(--primary2)
+    );
+
+  color:#fff;
+
+  text-align:center;
+
+  font-size:1.5rem;
+
+  font-weight:800;
+
+  padding:14px;
+
+  border-radius:14px;
+
+  margin-bottom:1rem;
+
   line-height:1.5;
 }
 
 .announcement-content{
-  color:#333;
   font-size:1.05rem;
-  line-height:1.8;
+
+  line-height:1.9;
+
+  color:#333;
 }
 
 .announcement-content p{
-  margin:0 0 10px 0;
   white-space:pre-wrap;
 }
 
-.announcement-title{
-  font-size:1.6rem;
-  font-weight:800;
+/* =========================================================
+   SEARCH BOX
+========================================================= */
+
+.search-box{
+  width:100%;
+
+  padding:1rem 1.1rem;
+
+  border-radius:14px;
+
+  border:2px solid #dce5f5;
+
+  font-size:1rem;
+
+  outline:none;
+
+  transition:.3s ease;
+
+  margin-bottom:1rem;
+}
+
+.search-box:focus{
+  border-color:var(--primary1);
+
+  box-shadow:
+    0 0 0 4px rgba(102,126,234,.12);
+}
+
+/* =========================================================
+   TABLE
+========================================================= */
+
+.table-wrapper{
+  overflow-x:auto;
+
+  border-radius:20px;
+
+  margin-top:1rem;
+
+  background:#fff;
+
+  box-shadow:
+    0 4px 16px rgba(0,0,0,.05);
+}
+
+table{
+  width:100%;
+
+  min-width:700px;
+
+  border-collapse:collapse;
+}
+
+th{
+  background:
+    linear-gradient(
+      135deg,
+      var(--primary1),
+      var(--primary2)
+    );
+
   color:#fff;
-  background:linear-gradient(135deg,#667eea,#764ba2);
+
+  padding:14px;
+
+  font-size:1rem;
+
+  text-align:left;
+}
+
+td{
+  padding:12px;
+}
+
+tr:nth-child(even){
+  background:#f8faff;
+}
+
+tr:hover{
+  background:#eef3ff;
+}
+
+/* =========================================================
+   GRID BUKU
+========================================================= */
+
+.book-grid{
+  display:grid;
+
+  grid-template-columns:
+    repeat(auto-fit,minmax(170px,1fr));
+
+  gap:18px;
+
+  margin-top:1.5rem;
+}
+
+.book-item{
+  background:#fff;
+
+  border-radius:18px;
+
+  padding:12px;
+
   text-align:center;
+
+  transition:.3s ease;
+
+  box-shadow:
+    0 5px 18px rgba(0,0,0,.06);
+}
+
+.book-item:hover{
+  transform:translateY(-5px);
+}
+
+.book-grid a img{
+  width:100%;
+
+  aspect-ratio:1/1;
+
+  object-fit:contain;
+
+  border-radius:14px;
+
+  background:#f7f7f7;
+
   padding:10px;
-  border-radius:10px;
-  margin-bottom:12px;
+}
+
+/* =========================================================
+   EMBED / IFRAME UMUM
+========================================================= */
+
+iframe{
+  max-width:100%;
+
+  border:none;
+
+  border-radius:22px;
+
+  background:#fff;
+
+  box-shadow:
+    0 10px 28px rgba(0,0,0,.12);
+}
+
+.embed-box{
+  width:100%;
+
+  overflow:hidden;
+
+  border-radius:22px;
+
+  background:#fff;
+
+  padding:10px;
+
+  margin:1.5rem auto;
+
+  box-shadow:
+    0 8px 24px rgba(0,0,0,.08);
+}
+
+/* =========================================================
+   VIDEO
+========================================================= */
+
+.video-item{
+  margin:2rem auto;
+
+  text-align:center;
+}
+
+.video-item iframe{
+  width:100%;
+
+  max-width:950px;
+
+  aspect-ratio:16/9;
+
+  background:#000;
+}
+
+/* =========================================================
+   PDF VIEWER
+========================================================= */
+
+.pdf-frame{
+  width:100%;
+
+  height:90vh;
+
+  border:none;
+}
+
+/* =========================================================
+   LOOKER STUDIO
+========================================================= */
+
+.looker-frame{
+  width:100%;
+
+  height:85vh;
+
+  border:none;
+}
+
+/* =========================================================
+   GAME FRAME
+========================================================= */
+
+.game-frame{
+  position:relative;
+
+  width:100%;
+
+  max-width:950px;
+
+  aspect-ratio:4/3;
+
+  margin:auto;
+
+  overflow:hidden;
+
+  border-radius:20px;
+
+  box-shadow:
+    0 8px 24px rgba(0,0,0,.15);
+}
+
+.game-frame iframe{
+  position:absolute;
+
+  inset:0;
+
+  width:100%;
+  height:100%;
+}
+
+/* =========================================================
+   UTILITIES
+========================================================= */
+
+.hidden{
+  display:none !important;
+}
+
+.loading{
+  text-align:center;
+
+  color:#666;
+
+  font-style:italic;
 }
 
 .spacer{
   height:25px;
 }
 
-.loading{
-  text-align:center;
-  color:#666;
-  font-style:italic;
-}      
+/* =========================================================
+   ANIMASI
+========================================================= */
 
-      /* search */
-      .search-box {
-        width: 100%;
-        padding: .75rem 1rem;
-        border-radius: 10px;
-        border: 2px solid #e6eef8;
-        margin-bottom: .75rem;
-        box-sizing: border-box;
-        font-size:1.7rem
-      }
+@keyframes fadeUp{
 
-      /* table */
-      .table-wrapper { overflow-x:auto; margin-top: .75rem; border-radius: 8px; background:#fff; padding: .5rem; }
-      table { width:100%; border-collapse: collapse; min-width:600px; }
-      th, td { padding: 10px 12px; text-align:left; }
-      th { background: linear-gradient(135deg,var(--primary1),var(--primary2)); color:#fff; font-weight:600;font-size:1.5rem }
-      tr:nth-child(even) { background: rgba(102,126,234,0.04); }
-      tr:hover { background: rgba(102,126,234,0.08); }
+  from{
+    opacity:0;
+    transform:translateY(20px);
+  }
 
-      /* book grid */
-      
-   
-.book-grid {
-  display: flex;
-  flex-direction: column; /* 🔥 ini kunci: jadi ke bawah */
-  gap: 12px;
-  margin-top: 1rem;
-  align-items: center; /* opsional biar tengah */
-} 
-
-.book-grid button {
-  width: 100%;
-  padding: 12px;
-  font-size: 1.1rem;
-} 
-
-.book-item {
-  width: 100%;
-  max-width: 500px;
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
 }
 
-.book-grid a img {
-  width: 180px;
-  height: 170px;
-  object-fit: contain; /* agar landscape tidak terpotong */
-  background-color: #f8f8f8; /* agar ruang kosong terlihat rapi */
-  display: block;
-  margin: 0 auto;
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media(max-width:1024px){
+
+  header h1{
+    font-size:1.8rem;
+  }
+
+  h2{
+    font-size:1.7rem;
+  }
+
+  .container{
+    width:96%;
+    padding:1.2rem;
+  }
 }
 
-.book-grid a img:hover {
-  transform: translateY(-4px) scale(1.03);
-  box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media(max-width:768px){
+
+  header{
+    padding:1rem;
+  }
+
+  header h1{
+    font-size:1.45rem;
+    line-height:1.5;
+  }
+
+  .container{
+    width:95%;
+
+    margin:1rem auto;
+
+    padding:1rem;
+
+    border-radius:20px;
+  }
+
+  h2{
+    font-size:1.5rem;
+  }
+
+  button{
+    width:100%;
+
+    font-size:1rem;
+  }
+
+  .announcement-title{
+    font-size:1.2rem;
+  }
+
+  .announcement-content{
+    font-size:1rem;
+  }
+
+  table{
+    min-width:600px;
+  }
+
+  th,td{
+    padding:10px;
+
+    font-size:.92rem;
+  }
+
+  .pdf-frame{
+    height:75vh;
+  }
+
+  .looker-frame{
+    height:70vh;
+  }
 }
 
-/* video item */
-.game-frame {
-  position: relative;
-  width: 100%;
-  max-width: 900px; /* batas lebar maksimal */
-  aspect-ratio: 4 / 3; /* rasio standar Scratch */
-  margin: 0 auto;
-  border-radius: 15px;
-  overflow: hidden;
-  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+/* =========================================================
+   PORTRAIT
+========================================================= */
+
+@media (orientation:portrait){
+
+  #photo{
+    max-height:75vh;
+  }
+
+  .book-grid{
+    grid-template-columns:
+      repeat(2,1fr);
+  }
 }
 
-.game-frame iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border: none;
-  max-width: 1000px;
-  margin: 0 auto;
-} 
+/* =========================================================
+   LANDSCAPE MOBILE
+========================================================= */
 
-.video-item iframe{
-  width:100%;
-  max-width:560px;
-  height:315px;
-  border:none;
+@media (orientation:landscape)
+and (max-width:950px){
+
+  header h1{
+    font-size:1.2rem;
+  }
+
+  .container{
+    width:96%;
+  }
+
+  #photo{
+    max-height:88vh;
+  }
+
+  .book-grid{
+    grid-template-columns:
+      repeat(4,1fr);
+  }
+
+  .looker-frame{
+    height:100vh;
+  }
+
+  button{
+    max-width:450px;
+  }
 }
-
-/* Responsif */
-      @media(max-width:768px){
-        .container{margin:1rem;padding:1rem;}
-        button{font-size:1.7rem;}
-      }
-      /* video item */
-      .video-item { margin: 1rem 0; text-align:center; }
-      .video-item iframe { width:100%; max-width:560px; height:315px; border-radius:12px; border:none; box-shadow:0 4px 18px rgba(0,0,0,0.12); }
-
-      @media (max-width:800px) {
-        .container { margin: 1rem; padding:1rem; }
-        #viewer { height: 45vh; }
-        .book-grid a img { width:120px; height:110px; }
-        table { font-size: .9rem; }
-      } 
-
 
     </style>
   </head>
