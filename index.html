@@ -1218,6 +1218,30 @@ function openBookEmbed(link, judul, viewerId){
       ${escapeHtml(judul)}
     </h3>
 
+    <div style="
+      text-align:center;
+      margin-bottom:15px;
+    ">
+
+      <a
+        href="${link}"
+        target="_blank"
+        style="
+          display:inline-block;
+          padding:10px 18px;
+          background:#4CAF50;
+          color:#fff;
+          text-decoration:none;
+          border-radius:10px;
+          font-weight:bold;
+        ">
+
+        📖 Buka Buku
+
+      </a>
+
+    </div>
+
     <iframe
       src="${link}"
       style="
@@ -1225,8 +1249,10 @@ function openBookEmbed(link, judul, viewerId){
         height:80vh;
         border:2px solid #ccc;
         border-radius:12px;
+        background:#fff;
       "
-      allow="autoplay">
+      allow="autoplay"
+      loading="lazy">
     </iframe>
 
   `;
@@ -1245,7 +1271,6 @@ function escapeHtml(text){
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#039;");
 }
-
 
 /* ======================
 LOAD SHEET
