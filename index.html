@@ -1227,6 +1227,32 @@ function openBookEmbed(link, judul, viewerId){
   return `https://drive.google.com/file/d/${fileId}/preview`;
 }
 
+function convertToEmbed(url) {
+
+  if (!url) return "";
+
+  let fileId = "";
+
+  // Format:
+  // https://drive.google.com/file/d/FILE_ID/view
+  const fileMatch = url.match(/\/file\/d\/([^\/]+)/);
+
+  if (fileMatch && fileMatch[1]) {
+
+    fileId = fileMatch[1];
+
+  } else {
+
+    // Format:
+    // https://drive.google.com/open?id=FILE_ID
+    const idMatch = url.match(/[?&]id=([^&]+)/);
+
+    if (idMatch && idMatch[1]) {
+      fileId = idMatch[1];
+    }
+  }
+
+  
   function escapeHtml(text) {
 
   return text
