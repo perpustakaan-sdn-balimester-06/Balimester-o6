@@ -1159,33 +1159,49 @@ function renderBooks(data, containerId){
 
   const viewerId = "bookViewer_" + containerId;
 
-    container.innerHTML = `
+  container.innerHTML = `
     <div class="book-grid"></div>
     <div id="${viewerId}" style="margin-top:20px;"></div>
   `;
-
-
-
 
   const grid = container.querySelector(".book-grid");
 
   data.forEach((b) => {
 
-    const btn = document.createElement("button");
-    btn.textContent = "📖 " + b.judul;
-
-    btn.addEventListener("click", () => {
-      openBookEmbed(b.link, b.judul, viewerId);
-    });
-
     const wrapper = document.createElement("div");
     wrapper.className = "book-item";
 
-    wrapper.appendChild(btn);
-    grid.appendChild(wrapper);
-  });
-} 
+    // Thumbnail buku
+    const img = document.createElement("img");
 
+    img.src =
+      b.thumb ||
+      `https://drive.google.com/thumbnail?id=${b.id}&sz=w500`;
+
+    img.alt = b.judul;
+
+    // Tombol buka buku
+    const btn = document.createElement("button");
+
+    btn.textContent = "📖 " + b.judul;
+
+    btn.addEventListener("click", () => {
+
+      openBookEmbed(
+        b.link || `https://drive.google.com/file/d/${b.id}/preview`,
+        b.judul,
+        viewerId
+      );
+
+    });
+
+    wrapper.appendChild(img);
+    wrapper.appendChild(btn);
+
+    grid.appendChild(wrapper);
+
+  });
+}
 function openBookEmbed(link, judul, viewerId){
   const viewer = document.getElementById(viewerId);
   if(!viewer) return;
@@ -1213,6 +1229,15 @@ function convertToEmbed(url) {
   return url;
 } 
 
+  function escapeHtml(text) {
+
+  return text
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
 
 
 
