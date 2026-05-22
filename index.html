@@ -1203,57 +1203,40 @@ function renderBooks(data, containerId){
   });
 }
 function openBookEmbed(link, judul, viewerId){
-  const viewer = document.getElementById(viewerId);
+
+  const viewer =
+    document.getElementById(viewerId);
+
   if(!viewer) return;
 
-  // Pastikan fungsi convertToEmbed didefinisikan (lihat poin di bawah)
-  let embedUrl = convertToEmbed(link);
-
   viewer.innerHTML = `
-    <h3 style="text-align:center; margin-top:20px;">${escapeHtml(judul)}</h3>
-    <iframe src="${embedUrl}" 
-            style="width:100%; height:80vh; border:2px solid #ccc; border-radius:12px;" 
-            allow="autoplay"></iframe>
+
+    <h3 style="
+      text-align:center;
+      margin-top:20px;
+    ">
+      ${escapeHtml(judul)}
+    </h3>
+
+    <iframe
+      src="${link}"
+      style="
+        width:100%;
+        height:80vh;
+        border:2px solid #ccc;
+        border-radius:12px;
+      "
+      allow="autoplay">
+    </iframe>
+
   `;
-  
-  // Scroll otomatis ke tampilan buku agar siswa tahu buku sudah terbuka
-  viewer.scrollIntoView({ behavior: 'smooth' });
-  
-} 
 
-
-  if (!fileId) return url;
-
-  return `https://drive.google.com/file/d/${fileId}/preview`;
+  viewer.scrollIntoView({
+    behavior:'smooth'
+  });
 }
 
-function convertToEmbed(url) {
-
-  if (!url) return "";
-
-  let fileId = "";
-
-  // Format:
-  // https://drive.google.com/file/d/FILE_ID/view
-  const fileMatch = url.match(/\/file\/d\/([^\/]+)/);
-
-  if (fileMatch && fileMatch[1]) {
-
-    fileId = fileMatch[1];
-
-  } else {
-
-    // Format:
-    // https://drive.google.com/open?id=FILE_ID
-    const idMatch = url.match(/[?&]id=([^&]+)/);
-
-    if (idMatch && idMatch[1]) {
-      fileId = idMatch[1];
-    }
-  }
-
-  
-  function escapeHtml(text) {
+function escapeHtml(text){
 
   return text
     .replace(/&/g, "&amp;")
@@ -1262,7 +1245,6 @@ function convertToEmbed(url) {
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#039;");
 }
-
 
 
 /* ======================
