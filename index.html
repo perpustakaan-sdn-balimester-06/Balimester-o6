@@ -945,7 +945,7 @@ and (max-width:950px){
 <script>
 
 const apiUrl =
-"https://script.google.com/macros/s/AKfycbwC7Q2V7RNVKVY-gur3004OrFKF9XnEXjko9mfaR1PyGB6rl1vAIG7XFCa8_wUyhP2uWA/exec";
+"https://script.google.com/macros/s/AKfycbxHwDzzeut69TGYhgAg2X-fLPAoZqytOguhCf2SFg9k0Q9cMGGUOxjDC4dxtNhHlFFrzw/exec";
 
 
 const spreadsheetId =
@@ -1221,30 +1221,6 @@ function openBookEmbed(link, judul, viewerId){
   
 } 
 
-function convertToEmbed(url) {
-
-  if (!url) return "";
-
-  let fileId = "";
-
-  // Format:
-  // https://drive.google.com/file/d/FILE_ID/view
-  const fileMatch = url.match(/\/file\/d\/([^\/]+)/);
-
-  if (fileMatch && fileMatch[1]) {
-
-    fileId = fileMatch[1];
-
-  } else {
-
-    // Format:
-    // https://drive.google.com/open?id=FILE_ID
-    const idMatch = url.match(/[?&]id=([^&]+)/);
-
-    if (idMatch && idMatch[1]) {
-      fileId = idMatch[1];
-    }
-  }
 
   if (!fileId) return url;
 
