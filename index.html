@@ -1221,13 +1221,21 @@ function openBookEmbed(link, judul, viewerId){
 } 
 
 function convertToEmbed(url) {
+
   if (!url) return "";
-  // Jika ini link Google Drive, ubah /view atau /edit menjadi /preview
-  if (url.includes("drive.google.com")) {
-    return url.replace(/\/view.*|\/edit.*/, "/preview");
+
+  // Ambil ID file Google Drive
+  const match = url.match(/[-\w]{25,}/);
+
+  if (match) {
+
+    const fileId = match[0];
+
+    return `https://drive.google.com/file/d/${fileId}/preview`;
   }
+
   return url;
-} 
+}
 
   function escapeHtml(text) {
 
