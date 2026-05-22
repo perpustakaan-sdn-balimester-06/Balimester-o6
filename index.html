@@ -1218,23 +1218,39 @@ function openBookEmbed(link, judul, viewerId){
   
   // Scroll otomatis ke tampilan buku agar siswa tahu buku sudah terbuka
   viewer.scrollIntoView({ behavior: 'smooth' });
+  let embedUrl = convertToEmbed(link);
+
+console.log(embedUrl);
 } 
 
 function convertToEmbed(url) {
 
   if (!url) return "";
 
-  // Ambil ID file Google Drive
-  const match = url.match(/[-\w]{25,}/);
+  let fileId = "";
 
-  if (match) {
+  // Format:
+  // https://drive.google.com/file/d/FILE_ID/view
+  const fileMatch = url.match(/\/file\/d\/([^\/]+)/);
 
-    const fileId = match[0];
+  if (fileMatch && fileMatch[1]) {
 
-    return `https://drive.google.com/file/d/${fileId}/preview`;
+    fileId = fileMatch[1];
+
+  } else {
+
+    // Format:
+    // https://drive.google.com/open?id=FILE_ID
+    const idMatch = url.match(/[?&]id=([^&]+)/);
+
+    if (idMatch && idMatch[1]) {
+      fileId = idMatch[1];
+    }
   }
 
-  return url;
+  if (!fileId) return url;
+
+  return `https://drive.google.com/file/d/${fileId}/preview`;
 }
 
   function escapeHtml(text) {
