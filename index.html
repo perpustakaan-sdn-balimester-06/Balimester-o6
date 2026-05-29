@@ -29,7 +29,7 @@
 <!-- Favicon / Icon Website -->
 <link rel="icon" href="https://perpustakaan-sdn-balimester-06.netlify.app/favicon.png" type="image/png" />
 
-    <link rel="icon" href="https://i.imgur.com/XXXXX.png" type="image/png" />
+    <link rel="icon" href="favicon.png">
 
     <style>
       /* === RESPONSIVE TAMBAHAN UNTUK HP DAN TABLET === */
@@ -236,6 +236,37 @@ button{
     0 8px 20px rgba(102,126,234,.25);
 }
 
+/* ======================
+BUTTON GET LINK HIJAU
+====================== */
+
+.btn-link-hijau{
+
+  background:
+    linear-gradient(
+      135deg,
+      #16a34a,
+      #22c55e
+    ) !important;
+
+  box-shadow:
+    0 8px 20px rgba(34,197,94,.30) !important;
+
+  color:#fff;
+
+  font-weight:700;
+}
+
+.btn-link-hijau:hover{
+
+  transform:
+    translateY(-3px)
+    scale(1.01);
+
+  box-shadow:
+    0 12px 28px rgba(34,197,94,.40) !important;
+}
+      
 button:hover{
   transform:
     translateY(-3px)
@@ -838,7 +869,8 @@ and (max-width:950px){
 </div>
 </div>     
   
-      <div style="text-align:center; margin-top:1rem;">
+      <div style="text-align:center; margin-top:1rem;"> 
+        <div id="getLink"></div>
         <button onclick="showDataMenu()">➡️ Lihat Data</button>
         <button onclick="exitApp()">🚪 Exit</button>
         <p>
@@ -956,7 +988,7 @@ and (max-width:950px){
 <script>
 
 const apiUrl =
-"https://script.google.com/macros/s/AKfycbxHwDzzeut69TGYhgAg2X-fLPAoZqytOguhCf2SFg9k0Q9cMGGUOxjDC4dxtNhHlFFrzw/exec";
+"https://script.google.com/macros/s/AKfycbyIROqZOHDTEoer29IWATXuBfsG8zijIQ-hlpn4scF-t6qqpgSAU6rUmKEdGhisnJZQeg/exec";
 
 
 const spreadsheetId =
@@ -986,7 +1018,9 @@ async function loadAllData(){
 
     const data =
       await response.json();
-
+if(!response.ok){
+  throw new Error("API gagal");
+}
     console.log(data);
 
     document.getElementById("visit-counter")
@@ -1014,7 +1048,38 @@ async function loadAllData(){
       data.bukuSiswa || [],
       "siswaContainer"
     );
+ const container =
+  document.getElementById("getLink");
 
+if(container){
+
+  container.innerHTML = "";
+
+  if(data.link){
+
+    const btn =
+      document.createElement("button");
+
+    btn.innerHTML =
+      "🔗 Buka Link Pengumuman";
+btn.className = "btn-link-hijau";
+    
+    btn.onclick = function(){
+
+      window.open(
+        data.link,
+        "_blank"
+      );
+    };
+
+    container.appendChild(btn);
+
+  }else{
+
+    container.innerHTML =
+      "";
+  }
+}
   }catch(err){
 
     console.error(err);
@@ -1023,9 +1088,9 @@ async function loadAllData(){
       .textContent =
       "❌ Gagal memuat data";
   }
-}
-
-/* ======================
+}  
+  
+  /* ======================
 FOTO
 ====================== */
 
@@ -1275,14 +1340,17 @@ function openBookEmbed(link, judul, viewerId){
 
 function escapeHtml(text){
 
-  return text
+  if(text === null || text === undefined){
+    return "";
+  }
+
+  return String(text)
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#039;");
 }
-
 /* ======================
 LOAD SHEET
 ====================== */
@@ -1734,41 +1802,25 @@ function getSheetByGid(gid){
 
       return sheets[i]
         .getDataRange()
-        getDisplayValues();
+        .getDisplayValues();
     }
   }
 
   return [];
 }
 
-/* ======================
-ESCAPE HTML
-====================== */
 
-function escapeHtml(text){
-
-  return String(text || "")
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;");
-}
 
 /* ======================
 START
 ====================== */
 
-window.onload = ()=>{
-
-  loadAllData();
-
-};
+window.addEventListener("load", loadAllData);
 
 </script>
 
 </body>
 </html>
-
 
 
 
